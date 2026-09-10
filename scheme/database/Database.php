@@ -269,10 +269,10 @@ class Database {
         );
 
         if ($driver === 'mysql' && filter_var(getenv('DB_SSL'), FILTER_VALIDATE_BOOLEAN)) {
-            $ssl_ca = getenv('DB_SSL_CA');
-            if ($ssl_ca) {
+            $ssl_ca = trim((string) getenv('DB_SSL_CA'));
+            $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = filter_var(getenv('DB_SSL_VERIFY'), FILTER_VALIDATE_BOOLEAN);
+            if ($ssl_ca && is_readable($ssl_ca)) {
                 $options[PDO::MYSQL_ATTR_SSL_CA] = $ssl_ca;
-                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
             }
         }
 
