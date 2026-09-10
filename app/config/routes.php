@@ -44,7 +44,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 /** @var object $router **/
 
-$router->get('/', 'Welcome::index');
+$router->get('/', 'AuthController::login');
 $router->get('/users', 'UsersController::index');
 
 $router->get('/login', 'AuthController::login');
